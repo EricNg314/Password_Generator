@@ -11,8 +11,6 @@ var nonNumeric = [
   "~","`","!","@","#","$","%","^","&","*","(",")","_","-","+","=","{","[","}","]","|","\\",":",";",'"',"'","<",",",">",".","?","/"
 ];
 
-
-
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
@@ -36,7 +34,6 @@ function generatePassword() {
     nonNumeric: document.getElementById('paramNonNumeric').checked,
   };
 
-
   var containsChar = {
     lower: false,
     upper: false,
@@ -44,21 +41,22 @@ function generatePassword() {
     nonNumeric: false
   };
 
-
-  validateRequest(numberOfChar, reqChar);
+  var validRequest = validateRequest(numberOfChar, reqChar);
   
+  if (validRequest = true){
 
-  // TODO: Make function to assign characters.
+    pass = makePassword(numberOfChar, reqChar, containsChar);
+    console.log("updated containsChar? ", containsChar)
 
-  // TODO: within function to assign, randomize between chosen sets.
+    var validation = validateResponse(reqChar, containsChar)
 
-  var validation = validateResponse(reqChar, containsChar)
-
-  if (validation == false && rerunAttempts > 1){
-    console.log("Failed");
-    rerunAttempts++
-    generatePassword()
+    if (validation == false && rerunAttempts > 1){
+      console.log("Failed");
+      rerunAttempts++
+      generatePassword()
+    }
   }
+
   console.log("pass: ", pass)
   return pass;
 }
@@ -94,6 +92,16 @@ function validateRequest(characters, types){
   }
 
   return confirmation;
+}
+
+function makePassword(numberOfChar, reqChar, containsChar) {
+  var passString = "";
+  for(var i = 1; i <= numberOfChar; i++){
+    // TODO: within function to assign, randomize between chosen sets.
+  }
+  console.log("making password");
+
+  return passString;
 }
 
 function validateResponse (required, contains){
