@@ -80,6 +80,16 @@ header {
   clear: both;
 }
 
+.requirements {    
+  font-size: 14px;
+  color: black;
+}
+
+.requirements .invalid {
+  font-size: 18px;
+  color: red!important;
+}
+
 .btn {
   border: none;
   background-color: hsl(360, 91%, 36%);

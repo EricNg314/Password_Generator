@@ -26,15 +26,16 @@ generateBtn.addEventListener("click", writePassword);
 
 function generatePassword() {
   var pass = "";
-  var numberOfChar = 10; // TODO: update with prompt.
+  var numberOfChar = document.getElementById('paramCharNumber').value
   var rerunAttempts = 0;
 
   var reqChar = {
-    lower: true,
-    upper: false,
-    numeric: false,
-    nonNumeric: false
+    lower: document.getElementById('paramLower').checked,
+    upper: document.getElementById('paramUpper').checked,
+    numeric: document.getElementById('paramNumeric').checked,
+    nonNumeric: document.getElementById('paramNonNumeric').checked,
   };
+
 
   var containsChar = {
     lower: false,
@@ -43,10 +44,15 @@ function generatePassword() {
     nonNumeric: false
   };
 
+
+  validateRequest(numberOfChar, reqChar);
+  
+
   // TODO: Make function to assign characters.
+
   // TODO: within function to assign, randomize between chosen sets.
 
-  var validation = validateRequest(reqChar, containsChar)
+  var validation = validateResponse(reqChar, containsChar)
 
   if (validation == false && rerunAttempts > 1){
     console.log("Failed");
@@ -57,7 +63,40 @@ function generatePassword() {
   return pass;
 }
 
-function validateRequest (required, contains){
+function validateRequest(characters, types){
+  // Validates if params include at 8-128 characters and contains at least 1 type.
+  var typeConfirm = false;
+  var charConfirm = false;
+  var confirmation = false;
+
+  // Check if at least 1 type is present
+  for(ea in types){
+    if(types[ea] === true){
+      typeConfirm = true;
+    }
+  }
+
+  if (!typeConfirm) {
+    // mark missing type.
+  }
+
+  if ((characters >= 8) && (characters <= 128)) {
+    charConfirm = true
+  } else {
+    // mark as invalid number.
+  }
+
+  if(typeConfirm && charConfirm){
+    console.log("password is good.")
+    confirmation = true
+  } else {
+    console.log("password is bad.")
+  }
+
+  return confirmation;
+}
+
+function validateResponse (required, contains){
   // Validates whether at least one character has been added per request.
   var pwCriteria = true;
   for (key in required){
@@ -67,3 +106,4 @@ function validateRequest (required, contains){
   }
   return pwCriteria;
 }
+
