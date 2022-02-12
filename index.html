@@ -14,7 +14,21 @@
       </header>
       <div class="card">
         <div class="card-header">
-          <h2>Generate a Password</h2>
+          <h2 class="card-title">Generate a Password</h2>
+          
+          <div>
+            <label for="paramCharNumber"> How many characters? </label>
+            <input type="number" id="paramCharNumber" name="paramCharNumber" value="0"><br>
+            <h3 class="card-params-title">Include the following options: </h3>
+            <input type="checkbox" id="paramLower" name="paramLower" checked>
+            <label for="paramLower"> Lowercase</label><br>
+            <input type="checkbox" id="paramUpper" name="paramUpper">
+            <label for="paramUpper"> Uppercase</label><br>
+            <input type="checkbox" id="paramNumeric" name="paramNumeric">
+            <label for="paramNumeric"> Numeric</label><br>
+            <input type="checkbox" id="paramNonNumeric" name="paramNonNumeric">
+            <label for="paramNonNumeric"> Non-numeric</label><br><br>
+          </div>
         </div>
         <div class="card-body">
           <textarea

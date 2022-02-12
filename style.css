@@ -50,6 +50,14 @@ header {
   height: 2px;
 }
 
+.card-title {
+  border-bottom: 2px solid lightgrey;
+}
+
+.card-params-title {
+  margin-bottom: 0px;
+}
+
 .card-body {
   min-height: 100px;
 }
