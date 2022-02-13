@@ -90,6 +90,12 @@ header {
   color: red!important;
 }
 
+.subText{
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: black;
+}
+
 .btn {
   border: none;
   background-color: hsl(360, 91%, 36%);

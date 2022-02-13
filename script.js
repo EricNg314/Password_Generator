@@ -1,13 +1,13 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-var letters = [
+var lettersArr = [
   "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"
 ];
-var numeric = [
+var numericArr = [
   "0","1","2","3","4","5","6","7","8","9"
 ];
-var nonNumeric = [
+var nonNumericArr = [
   "~","`","!","@","#","$","%","^","&","*","(",")","_","-","+","=","{","[","}","]","|","\\",":",";",'"',"'","<",",",">",".","?","/"
 ];
 
@@ -43,14 +43,14 @@ function generatePassword() {
 
   var validRequest = validateRequest(numberOfChar, reqChar);
   
-  if (validRequest = true){
+  if (validRequest == true){
 
     pass = makePassword(numberOfChar, reqChar, containsChar);
     console.log("updated containsChar? ", containsChar)
 
     var validation = validateResponse(reqChar, containsChar)
 
-    if (validation == false && rerunAttempts > 1){
+    if (validation == false && rerunAttempts > 5){
       console.log("Failed");
       rerunAttempts++
       generatePassword()
@@ -111,13 +111,13 @@ function makePassword(numberOfChar, reqChar, containsChar) {
     var charType = paramArr[getRandomInt(numbOfParam)]
 
     if(charType === "lower"){
-      passString = passString + getRandValue(valueArr, 'lower')
+      passString = passString + getRandValue(lettersArr, 'lower')
     } else if (charType === "upper") {
-      passString = passString + getRandValue('upper')
+      passString = passString + getRandValue(lettersArr, 'upper')
     } else if (charType === "numeric") {
-      passString = passString + getRandValue(valueArr, 'none')
+      passString = passString + getRandValue(numericArr, 'none')
     } else if (charType === "nonNumeric") {
-      passString = passString + getRandValue(valueArr, 'none')
+      passString = passString + getRandValue(nonNumericArr, 'none')
     }
     containsChar[charType] = true
     
@@ -134,16 +134,14 @@ function getRandomInt(max){
 function getRandValue(valueArr, letterCase){
   var string = '';
   if(letterCase === 'lower'){
-
+    string = valueArr[getRandomInt(valueArr.length)]
   } else if (letterCase === 'upper') {
-
+    string = valueArr[getRandomInt(valueArr.length)].toUpperCase()
   } else if ('none') {
-
+    string = valueArr[getRandomInt(valueArr.length)]
   }
   return string
 }
-
-
 
 function validateResponse (required, contains){
   // Validates whether at least one character has been added per request.
