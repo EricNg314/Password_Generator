@@ -34,6 +34,7 @@ function generatePassword() {
     nonNumeric: document.getElementById('paramNonNumeric').checked,
   };
 
+  // For validation against requirements.
   var containsChar = {
     lower: false,
     upper: false,
@@ -41,9 +42,9 @@ function generatePassword() {
     nonNumeric: false
   };
 
-  var validRequest = validateRequest(numberOfChar, reqChar);
+  var validRequest = validateRequest(numberOfChar, reqChar, containsChar);
   
-  if (validRequest == true){
+  if (validRequest === true){
 
     pass = makePassword(numberOfChar, reqChar, containsChar);
     console.log("updated containsChar? ", containsChar)
@@ -68,7 +69,7 @@ function validateRequest(characters, types){
   var confirmation = false;
 
   // Check if at least 1 type is present
-  for(ea in types){
+  for(var ea in types){
     if(types[ea] === true){
       typeConfirm = true;
     }
@@ -147,7 +148,7 @@ function validateResponse (required, contains){
   // Validates whether at least one character has been added per request.
   var pwCriteria = true;
   for (key in required){
-    if (required.key !== contains.key){
+    if (required[key] !== contains[key]){
       pwCriteria = false;
     }
   }
