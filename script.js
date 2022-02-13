@@ -25,7 +25,8 @@ generateBtn.addEventListener("click", writePassword);
 function generatePassword() {
   var pass = "";
   var numberOfChar = document.getElementById('paramCharNumber').value
-  var rerunAttempts = 0;
+  var reRunAttempts = 0;
+  var maxReRunAttempts = 10;
 
   var reqChar = {
     lower: document.getElementById('paramLower').checked,
@@ -46,19 +47,30 @@ function generatePassword() {
   
   if (validRequest === true){
 
-    pass = makePassword(numberOfChar, reqChar, containsChar);
-    console.log("updated containsChar? ", containsChar)
+    function runMakePassword(){
 
-    var validation = validateResponse(reqChar, containsChar)
-
-    if (validation == false && rerunAttempts > 5){
-      console.log("Failed");
-      rerunAttempts++
-      generatePassword()
+      pass = makePassword(numberOfChar, reqChar, containsChar);
+  
+      var validation = validateResponse(reqChar, containsChar, numberOfChar, pass)
+      console.log("validation: ", validation)
+  
+      console.log("pass attempt: ", pass)
+      if (validation == false && reRunAttempts <= maxReRunAttempts){
+        reRunAttempts++
+        console.log("Failed reRunAttempts: ", reRunAttempts);
+        // Resetting contains type.
+        containsChar = {
+          lower: false,
+          upper: false,
+          numeric: false,
+          nonNumeric: false
+        };
+        runMakePassword()
+      }
     }
+    runMakePassword()
   }
 
-  console.log("pass: ", pass)
   return pass;
 }
 
@@ -86,10 +98,10 @@ function validateRequest(characters, types){
   }
 
   if(typeConfirm && charConfirm){
-    console.log("password is good.")
+    // console.log("password request is good.")
     confirmation = true
   } else {
-    console.log("password is bad.")
+    console.log("password request is bad.")
   }
 
   return confirmation;
@@ -138,20 +150,29 @@ function getRandValue(valueArr, letterCase){
     string = valueArr[getRandomInt(valueArr.length)]
   } else if (letterCase === 'upper') {
     string = valueArr[getRandomInt(valueArr.length)].toUpperCase()
-  } else if ('none') {
+  } else if (letterCase === 'none') {
     string = valueArr[getRandomInt(valueArr.length)]
   }
   return string
 }
 
-function validateResponse (required, contains){
+function validateResponse (required, contains, reqNumb, pass){
   // Validates whether at least one character has been added per request.
   var pwCriteria = true;
+
   for (key in required){
     if (required[key] !== contains[key]){
+      console.log(`validateResponse: required[${key}]: `, required[key])
+      console.log(`validateResponse: contains[${key}]: `, contains[key])
       pwCriteria = false;
     }
   }
+
+  if(pass.length < reqNumb) {
+    console.log("validateResponse: Failed pass.length: ", pass.length)
+    pwCriteria = false;
+  }
+
   return pwCriteria;
 }
 
