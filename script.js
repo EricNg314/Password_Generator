@@ -96,13 +96,54 @@ function validateRequest(characters, types){
 
 function makePassword(numberOfChar, reqChar, containsChar) {
   var passString = "";
+  var paramArr = [];
+
+  for(key in reqChar) {
+    if(reqChar[key] === true){
+      paramArr.push(key)
+    }
+  }
+
+  var numbOfParam = paramArr.length;
+
   for(var i = 1; i <= numberOfChar; i++){
     // TODO: within function to assign, randomize between chosen sets.
+    var charType = paramArr[getRandomInt(numbOfParam)]
+
+    if(charType === "lower"){
+      passString = passString + getRandValue(valueArr, 'lower')
+    } else if (charType === "upper") {
+      passString = passString + getRandValue('upper')
+    } else if (charType === "numeric") {
+      passString = passString + getRandValue(valueArr, 'none')
+    } else if (charType === "nonNumeric") {
+      passString = passString + getRandValue(valueArr, 'none')
+    }
+    containsChar[charType] = true
+    
   }
   console.log("making password");
 
   return passString;
 }
+
+function getRandomInt(max){
+  return Math.floor(Math.random() * max)
+}
+
+function getRandValue(valueArr, letterCase){
+  var string = '';
+  if(letterCase === 'lower'){
+
+  } else if (letterCase === 'upper') {
+
+  } else if ('none') {
+
+  }
+  return string
+}
+
+
 
 function validateResponse (required, contains){
   // Validates whether at least one character has been added per request.
