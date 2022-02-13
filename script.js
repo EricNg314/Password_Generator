@@ -69,6 +69,8 @@ function generatePassword() {
       }
     }
     runMakePassword()
+  } else {
+    pass = "Please check all requirements."
   }
 
   return pass;
@@ -89,19 +91,25 @@ function validateRequest(characters, types){
 
   if (!typeConfirm) {
     // mark missing type.
+    document.getElementById('typeOption').classList.add('invalid');
+  } else {
+    document.getElementById('typeOption').classList.remove('invalid');
   }
 
   if ((characters >= 8) && (characters <= 128)) {
-    charConfirm = true
+    charConfirm = true;
+    document.getElementById('numbOption').classList.remove('invalid');
   } else {
     // mark as invalid number.
+    document.getElementById('numbOption').classList.add('invalid');
   }
 
   if(typeConfirm && charConfirm){
     // console.log("password request is good.")
-    confirmation = true
+    
+    confirmation = true;
   } else {
-    console.log("password request is bad.")
+    console.log("password request is bad.");
   }
 
   return confirmation;

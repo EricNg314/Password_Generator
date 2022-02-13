@@ -85,7 +85,7 @@ header {
   color: black;
 }
 
-.requirements .invalid {
+.requirements.invalid {
   font-size: 18px;
   color: red!important;
 }
