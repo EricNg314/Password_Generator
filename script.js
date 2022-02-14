@@ -85,8 +85,8 @@ function validateRequest(characters, types){
   var confirmation = false;
 
   // Check if at least 1 type is present
-  for(var ea in types){
-    if(types[ea] === true){
+  for(var key in types){
+    if(types[key] === true){
       typeConfirm = true;
     }
   }
@@ -121,7 +121,7 @@ function makePassword(numberOfChar, reqChar, containsChar) {
   var passString = "";
   var paramArr = [];
 
-  for(key in reqChar) {
+  for(var key in reqChar) {
     if(reqChar[key] === true){
       paramArr.push(key)
     }
@@ -170,7 +170,7 @@ function validateResponse (required, contains, reqNumb, pass){
   // Validates whether at least one character has been added per request.
   var pwCriteria = true;
 
-  for (key in required){
+  for (var key in required){
     if (required[key] !== contains[key]){
       // console.log(`validateResponse: required[${key}]: `, required[key])
       // console.log(`validateResponse: contains[${key}]: `, contains[key])
