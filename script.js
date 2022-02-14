@@ -52,12 +52,12 @@ function generatePassword() {
       pass = makePassword(numberOfChar, reqChar, containsChar);
   
       var validation = validateResponse(reqChar, containsChar, numberOfChar, pass)
-      console.log("validation: ", validation)
+      // console.log("validation: ", validation)
   
-      console.log("pass attempt: ", pass)
+      // console.log("pass attempt: ", pass)
       if (validation == false && reRunAttempts <= maxReRunAttempts){
         reRunAttempts++
-        console.log("Failed reRunAttempts: ", reRunAttempts);
+        // console.log("Failed reRunAttempts: ", reRunAttempts);
         // Resetting contains type.
         containsChar = {
           lower: false,
@@ -66,6 +66,8 @@ function generatePassword() {
           nonNumeric: false
         };
         runMakePassword()
+      } else if (validation == false && reRunAttempts > maxReRunAttempts) {
+        pass = "Sorry issue with attempt. Please try running again."
       }
     }
     runMakePassword()
@@ -109,7 +111,7 @@ function validateRequest(characters, types){
     
     confirmation = true;
   } else {
-    console.log("password request is bad.");
+    // console.log("password request is bad.");
   }
 
   return confirmation;
@@ -143,7 +145,7 @@ function makePassword(numberOfChar, reqChar, containsChar) {
     containsChar[charType] = true
     
   }
-  console.log("making password");
+  // console.log("making password");
 
   return passString;
 }
@@ -170,14 +172,14 @@ function validateResponse (required, contains, reqNumb, pass){
 
   for (key in required){
     if (required[key] !== contains[key]){
-      console.log(`validateResponse: required[${key}]: `, required[key])
-      console.log(`validateResponse: contains[${key}]: `, contains[key])
+      // console.log(`validateResponse: required[${key}]: `, required[key])
+      // console.log(`validateResponse: contains[${key}]: `, contains[key])
       pwCriteria = false;
     }
   }
 
   if(pass.length < reqNumb) {
-    console.log("validateResponse: Failed pass.length: ", pass.length)
+    // console.log("validateResponse: Failed pass.length: ", pass.length)
     pwCriteria = false;
   }
 
