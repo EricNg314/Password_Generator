@@ -43,7 +43,7 @@ function generatePassword() {
     nonNumeric: false
   };
 
-  var validRequest = validateRequest(numberOfChar, reqChar, containsChar);
+  var validRequest = validateRequest(numberOfChar, reqChar);
   
   if (validRequest === true){
 
@@ -98,7 +98,7 @@ function validateRequest(characters, types){
     document.getElementById('typeOption').classList.remove('invalid');
   }
 
-  if ((characters >= 8) && (characters <= 128)) {
+  if ((characters >= 8) && (characters <= 128) && (Number.isInteger(parseFloat(characters)))) {
     charConfirm = true;
     document.getElementById('numbOption').classList.remove('invalid');
   } else {
